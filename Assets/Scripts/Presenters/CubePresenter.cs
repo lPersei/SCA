@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
+using Enities;
 using UniRx;
 using UnityEngine;
+using Usecases;
 
-namespace SCA
+namespace Presenters
 {
     public class CubePresenter : MonoBehaviour, ICubePresenter
     {
-        private ICubeUsecase _usecase;
+        private IColorUsecase _usecase;
 
         public List<ReactiveProperty<Cube>> Cubes { get; } = new()
         {
@@ -16,7 +18,7 @@ namespace SCA
             new ReactiveProperty<Cube>()
         };
 
-        public void Initialize(ICubeUsecase usecase)
+        public void Initialize(IColorUsecase usecase)
         {
             _usecase = usecase;
 
@@ -30,12 +32,12 @@ namespace SCA
 
         void UpdateCube(Cube cube)
         {
-            Cubes[cube.Index].Value = cube;
+            Cubes[cube.Id].Value = cube;
         }
 
-        public void ChangeColor(int index, Color color)
+        public void ChangeColor(int id, Color color)
         {
-            _usecase.ChangeColor(index, color);
+            _usecase.ChangeColor(id, color);
         }
     }
 }

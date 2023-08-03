@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-namespace SCA
+namespace Gateway
 {
     public interface ICubeDBGateway
     {
-        void SetColor(int index, Color newColor);
-        Color GetColor(int index);
+        void SetColor(int id, Color newColor);
+        Color GetColor(int id);
     }
 }

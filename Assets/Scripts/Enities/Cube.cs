@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-namespace SCA
+namespace Enities
 {
     public class Cube
     {
-        public int Index { get; set; }
+        public int Id { get; set; }
         public Color Color { get; set; }
     }
 }

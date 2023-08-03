@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using Enities;
 using UnityEngine;
 
-namespace SCA
+namespace Gateway
 {
     public class CubeDBGateway : ICubeDBGateway
     {
@@ -15,20 +16,20 @@ namespace SCA
             {
                 _cubes.Add(new Cube
                 {
-                    Index = i,
+                    Id = i,
                     Color = Color.white
                 });
             }
         }
         
-        public void SetColor(int index, Color newColor)
+        public void SetColor(int id, Color newColor)
         {
-            _cubes[index].Color = newColor;
+            _cubes[id].Color = newColor;
         }
 
-        public Color GetColor(int index)
+        public Color GetColor(int id)
         {
-            return _cubes[index].Color;
+            return _cubes[id].Color;
         }
     }
 }

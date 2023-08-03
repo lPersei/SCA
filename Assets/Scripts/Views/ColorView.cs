@@ -1,12 +1,13 @@
-﻿using UniRx;
+﻿using Presenters;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace SCA
+namespace Views
 {
-    public class CubeColorView : MonoBehaviour
+    public class ColorView : MonoBehaviour
     {
-        public int index;
+        public int id;
         
         [Inject] private ICubePresenter _presenter;
         private Renderer _renderer;
@@ -18,7 +19,7 @@ namespace SCA
 
         private void Start()
         {
-            var rxProperty = _presenter.Cubes[index];
+            var rxProperty = _presenter.Cubes[id];
 
             rxProperty.Subscribe(cube => UpdateColor(cube.Color)).AddTo(this);
         }

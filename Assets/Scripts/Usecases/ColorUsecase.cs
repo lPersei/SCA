@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
+using Enities;
+using Gateway;
 using UniRx;
 using UnityEngine;
 
-namespace SCA
+namespace Usecases
 {
-    public class CubeUsecase : ICubeUsecase
+    public class ColorUsecase : IColorUsecase
     {
         private readonly ICubeDBGateway _gateway;
 
         public List<ReactiveProperty<Cube>> Cubes { get; } = new();
 
-        public CubeUsecase(ICubeDBGateway gateway)
+        public ColorUsecase(ICubeDBGateway gateway)
         {
             _gateway = gateway;
 
@@ -18,19 +20,19 @@ namespace SCA
             {
                 Cubes.Add(new ReactiveProperty<Cube>(new Cube
                 {
-                    Index = i,
+                    Id = i,
                     Color = _gateway.GetColor(i)
                 }));
             }
         }
         
-        public void ChangeColor(int index, Color color)
+        public void ChangeColor(int id, Color color)
         {
-            _gateway.SetColor(index, color);
+            _gateway.SetColor(id, color);
             
-            Cubes[index].Value = new Cube
+            Cubes[id].Value = new Cube
             {
-                Index = index,
+                Id = id,
                 Color = color
             };
         }

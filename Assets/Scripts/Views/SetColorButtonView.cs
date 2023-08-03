@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using Presenters;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace SCA
+namespace Views
 {
-    public class CubeColorButtonView : MonoBehaviour
+    public class SetColorButtonView : MonoBehaviour
     {
-        public int index;
+        public int id;
         
         [Inject] private ICubePresenter _presenter;
         private Button _button;
@@ -16,7 +17,7 @@ namespace SCA
             _button = GetComponent<Button>();
             
             _button.onClick.AddListener(() => {
-                _presenter.ChangeColor(index, Random.ColorHSV());
+                _presenter.ChangeColor(id, Random.ColorHSV());
             });
         }
     }
