@@ -6,7 +6,7 @@ namespace Entities.Enemies
 {
     public class SpawnEnemyButtonView : MonoBehaviour
     {
-        [Inject]
+        [Inject(Id = "Enemy")]
         private IEntitiesSpawnerPresenter _spawner;
         private Button _button;
 

@@ -1,4 +1,5 @@
 ﻿using UniRx;
+using UnityEngine;
 
 namespace Entities.Enemies
 {
@@ -17,14 +18,28 @@ namespace Entities.Enemies
             _enemies.Remove(id);
         }
 
-        public void UpdateEntity(Entity updatedEntity)
+        public void UpdateEntity(int id, Entity updatedEntity)
         {
-            _enemies[updatedEntity.Id] = updatedEntity;
+            _enemies[id] = updatedEntity;
         }
 
         public Entity GetEntity(int id)
         {
             return _enemies[id];
+        }
+        
+        public void UpdateEntityPosition(int id, Vector3 position)
+        {
+            var enemy = _enemies[id];
+            enemy.Position = position;
+            _enemies[id] = enemy;
+        }
+        
+        public void UpdateEntityRotation(int id, Quaternion rotation)
+        {
+            var enemy = _enemies[id];
+            enemy.Rotation = rotation;
+            _enemies[id] = enemy;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Entities.Enemies
 {
     public class DespawnEnemyButtonView : MonoBehaviour
     {
-        [Inject] private IEntitiesTerminator _terminator;
+        [Inject(Id = "Enemy")] private IEntitiesTerminator _terminator;
 
         private Button _button;
         

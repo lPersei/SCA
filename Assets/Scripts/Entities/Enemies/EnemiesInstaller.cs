@@ -10,41 +10,30 @@ namespace Entities.Enemies
         {
             var db = new EnemiesDb();
         
-            var managementUsecase = new EntitiesManagementUsecase(db);
-            var transformUsecase = new EnemiesTransformUsecase(db);
+            var managementUseCase = new EntitiesManagementUsecase(db);
+            var movementUseCase = new EntitiesMovementUseCase(db);
+            var rotationUseCase = new EntitiesRotationUseCase(db);
         
-            var presenter = new EnemiesPresenter(transformUsecase);
+            var presenter = new EnemiesPresenter(movementUseCase, rotationUseCase);
             var spawner = gameObject.AddComponent<EnemiesSpawner>();
-            spawner.Initialize(managementUsecase, _prefab);
-            var terminator = new EnemiesTerminator(managementUsecase);
-            
-            Container
-                .Bind<IEntityDbGateway>()
-                .FromInstance(db)
-                .AsCached();
-
-            Container
-                .Bind<IEntitiesManagementUsecase>()
-                .FromInstance(managementUsecase)
-                .AsCached();
-
-            Container
-                .Bind<IEntitiesTransformUsecase>()
-                .FromInstance(transformUsecase)
-                .AsCached();
+            spawner.Initialize(managementUseCase, _prefab);
+            var terminator = new EnemiesTerminator(managementUseCase);
         
             Container
                 .Bind<IEntityPresenter>()
+                .WithId("Enemy")
                 .FromInstance(presenter)
                 .AsCached();
             
             Container
                 .Bind<IEntitiesSpawnerPresenter>()
+                .WithId("Enemy")
                 .FromInstance(spawner)
                 .AsCached();
             
             Container
                 .Bind<IEntitiesTerminator>()
+                .WithId("Enemy")
                 .FromInstance(terminator)
                 .AsCached();
         }

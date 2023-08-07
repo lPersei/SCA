@@ -2,22 +2,19 @@
 using UnityEngine;
 using Zenject;
 
-namespace Entities.Enemies
+namespace Entities.Heroes
 {
-    public class EnemyView : MonoBehaviour
+    public class HeroView : MonoBehaviour
     {
-        public int Id { get; private set; }
-
-        [Inject(Id = "Enemy")] private IEntityPresenter _presenter;
-        [Inject(Id = "Hero")] private IEntityPresenter _heroPresenter;
+        [Inject(Id = "Hero")] private IEntityPresenter _presenter;
         
-        private Vector3 _heroPosition;
+        public int Id { get; private set; }
 
         private void Awake()
         {
             Id = gameObject.GetInstanceID();
         }
-
+        
         private void Start()
         {
             _presenter.Entities.ObserveRemove()
@@ -39,19 +36,26 @@ namespace Entities.Enemies
                     }
                 })
                 .AddTo(this);
-            
-            _heroPresenter.Entities.ObserveReplace()
-                .Subscribe(x =>
-                {
-                    _heroPosition = x.NewValue.Position;
-                })
-                .AddTo(this);
         }
 
         private void Update()
         {
-            _presenter.Move(Id, Vector3.MoveTowards(transform.position, _heroPosition, 5 * Time.deltaTime));
-            _presenter.Rotate(Id, transform.rotation * Quaternion.Euler(0, 0, 90 * Time.deltaTime));
+            if (Input.GetKey(KeyCode.W))
+            {
+                _presenter.Move(Id, transform.position + transform.forward * 5 * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                _presenter.Move(Id, transform.position - transform.forward * 5 * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                _presenter.Move( Id, transform.position - transform.right * 5 * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                _presenter.Move(Id, transform.position + transform.right * 5 * Time.deltaTime);
+            }
         }
     }
 }
