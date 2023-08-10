@@ -3,11 +3,10 @@ using UnityEngine;
 
 namespace Entities.Heroes
 {
-    public interface IEntityPresenter
+    public interface IEntityMovementUseCase
     {
         public IReadOnlyReactiveProperty<Entity> Entity { get; }
         
-        public void Move(Vector3 position);
-        public void Rotate(Quaternion rotation);
+        public void MoveEntity(Vector3 position);
     }
 }

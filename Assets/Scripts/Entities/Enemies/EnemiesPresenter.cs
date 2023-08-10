@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Entities.Enemies
 {
-    public class EnemiesPresenter : IEntityPresenter
+    public class EnemiesPresenter : IEntitiesPresenter
     {
         public IReadOnlyReactiveDictionary<int, Entity> Entities { get; }
 

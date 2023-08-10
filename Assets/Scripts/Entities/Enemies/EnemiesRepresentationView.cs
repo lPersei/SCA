@@ -7,7 +7,7 @@ namespace Entities.Enemies
 {
     public class EnemiesRepresentationView : MonoBehaviour
     {
-        [Inject(Id = "Enemy")] private IEntityPresenter _presenter;
+        [Inject(Id = "Enemy")] private IEntitiesPresenter _presenter;
 
         [SerializeField] private Transform _grid;
         [SerializeField] private GameObject _uiPrefab;

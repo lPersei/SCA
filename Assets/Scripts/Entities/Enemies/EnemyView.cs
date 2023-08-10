@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using Entities.Heroes;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -8,7 +9,7 @@ namespace Entities.Enemies
     {
         public int Id { get; private set; }
 
-        [Inject(Id = "Enemy")] private IEntityPresenter _presenter;
+        [Inject(Id = "Enemy")] private IEntitiesPresenter _presenter;
         [Inject(Id = "Hero")] private IEntityPresenter _heroPresenter;
         
         private Vector3 _heroPosition;
@@ -40,10 +41,10 @@ namespace Entities.Enemies
                 })
                 .AddTo(this);
             
-            _heroPresenter.Entities.ObserveReplace()
+            _heroPresenter.Entity
                 .Subscribe(x =>
                 {
-                    _heroPosition = x.NewValue.Position;
+                    _heroPosition = x.Position;
                 })
                 .AddTo(this);
         }

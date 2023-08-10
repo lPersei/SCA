@@ -20,7 +20,7 @@ namespace Entities.Enemies
             var terminator = new EnemiesTerminator(managementUseCase);
         
             Container
-                .Bind<IEntityPresenter>()
+                .Bind<IEntitiesPresenter>()
                 .WithId("Enemy")
                 .FromInstance(presenter)
                 .AsCached();
