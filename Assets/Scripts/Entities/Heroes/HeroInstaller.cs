@@ -16,7 +16,7 @@ namespace Entities.Heroes
         {
             _hero = new ReactiveProperty<Entity>(new Hero(0)
             {
-                Hp = 20,
+                Health = 20,
                 Position = Vector3.zero,
                 Rotation = Quaternion.identity
             });

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Entities.Enemies.Management;
+using Entities.Transforms;
+using UnityEngine;
 using Zenject;
 
 namespace Entities.Enemies
@@ -10,11 +12,12 @@ namespace Entities.Enemies
         {
             var db = new EnemiesDb();
         
-            var managementUseCase = new EntitiesManagementUsecase(db);
+            var managementUseCase = new EntitiesManagementUseCase(db);
             var movementUseCase = new EntitiesMovementUseCase(db);
             var rotationUseCase = new EntitiesRotationUseCase(db);
+            var healthUseCase = new EntitiesHealthUseCase(db);
         
-            var presenter = new EnemiesPresenter(movementUseCase, rotationUseCase);
+            var presenter = new EnemiesPresenter(movementUseCase, rotationUseCase, managementUseCase, healthUseCase);
             var spawner = gameObject.AddComponent<EnemiesSpawner>();
             spawner.Initialize(managementUseCase, _prefab);
             var terminator = new EnemiesTerminator(managementUseCase);

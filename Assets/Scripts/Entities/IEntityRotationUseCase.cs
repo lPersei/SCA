@@ -1,7 +1,7 @@
 ﻿using UniRx;
 using UnityEngine;
 
-namespace Entities.Heroes
+namespace Entities
 {
     public interface IEntityRotationUseCase
     {

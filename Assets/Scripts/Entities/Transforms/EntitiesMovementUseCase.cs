@@ -1,23 +1,23 @@
 ﻿using UniRx;
 using UnityEngine;
 
-namespace Entities.Enemies
+namespace Entities.Transforms
 {
     public class EntitiesMovementUseCase : IEntitiesMovementUseCase
     {
-        public IReadOnlyReactiveDictionary<int, Entity> Entities { get; }
+        public IReadOnlyReactiveDictionary<int, ReactiveProperty<Vector3>> Positions { get; }
 
-        private readonly IEntityDbGateway _entityDb;
-        
-        public EntitiesMovementUseCase(IEntityDbGateway entityDb)
+        private readonly IEntitiesDbGateway _entitiesDb;
+
+        public EntitiesMovementUseCase(IEntitiesDbGateway entitiesDb)
         {
-            _entityDb = entityDb;
-            Entities = _entityDb.Entities;
+            _entitiesDb = entitiesDb;
+            Positions = _entitiesDb.EntitiesPositions;
         }
-        
+
         public void MoveEntity(int id, Vector3 position)
         {
-            _entityDb.UpdateEntityPosition(id, position);
+            _entitiesDb.UpdateEntityPosition(id, position);
         }
     }
 }

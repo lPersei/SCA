@@ -2,6 +2,6 @@
 {
     public interface IEntitiesTerminator
     {
-        public void Terminate();
+        public void Terminate(int id);
     }
 }

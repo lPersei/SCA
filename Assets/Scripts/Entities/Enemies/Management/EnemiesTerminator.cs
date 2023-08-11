@@ -1,20 +1,19 @@
-﻿using Entities.Enemies;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Entities
+namespace Entities.Enemies.Management
 {
     public class EnemiesTerminator : IEntitiesTerminator
     {
-        private readonly IEntitiesManagementUsecase _managementUsecase;
+        private readonly IEntitiesManagementUseCase managementUseCase;
 
-        public EnemiesTerminator(IEntitiesManagementUsecase managementUsecase)
+        public EnemiesTerminator(IEntitiesManagementUseCase managementUseCase)
         {
-            _managementUsecase = managementUsecase;
+            this.managementUseCase = managementUseCase;
         }
         
-        public void Terminate()
+        public void Terminate(int id)
         {
-            _managementUsecase.DeleteEntity(GameObject.FindObjectOfType<EnemyView>().gameObject.GetInstanceID());   
+            managementUseCase.DeleteEntity(id);   
         }
     }
 }

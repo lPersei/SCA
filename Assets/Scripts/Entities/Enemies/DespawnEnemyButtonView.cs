@@ -14,7 +14,7 @@ namespace Entities.Enemies
         {
             _button = GetComponent<Button>();
 
-            _button.onClick.AddListener(() => _terminator.Terminate());
+            _button.onClick.AddListener(() => _terminator.Terminate(FindObjectOfType<EnemyView>().gameObject.GetInstanceID()));
         }
     }
 }

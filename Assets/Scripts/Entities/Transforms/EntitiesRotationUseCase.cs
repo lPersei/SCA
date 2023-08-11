@@ -1,23 +1,23 @@
 ﻿using UniRx;
 using UnityEngine;
 
-namespace Entities.Enemies
+namespace Entities.Transforms
 {
     public class EntitiesRotationUseCase : IEntitiesRotationUseCase
     {
-        public IReadOnlyReactiveDictionary<int, Entity> Entities { get; }
+        public IReadOnlyReactiveDictionary<int, ReactiveProperty<Quaternion>> Rotations { get; }
 
-        private readonly IEntityDbGateway _entityDb;
+        private readonly IEntitiesDbGateway _entitiesDb;
         
-        public EntitiesRotationUseCase(IEntityDbGateway entityDb)
+        public EntitiesRotationUseCase(IEntitiesDbGateway entitiesDb)
         {
-            _entityDb = entityDb;
-            Entities = _entityDb.Entities;
+            _entitiesDb = entitiesDb;
+            Rotations = _entitiesDb.EntitiesRotations;
         }
 
         public void RotateEntity(int id, Quaternion rotation)
         {
-            _entityDb.UpdateEntityRotation(id, rotation);
+            _entitiesDb.UpdateEntityRotation(id, rotation);
         }
     }
 }

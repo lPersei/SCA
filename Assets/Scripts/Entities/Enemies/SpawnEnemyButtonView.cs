@@ -14,7 +14,11 @@ namespace Entities.Enemies
         {
             _button = GetComponent<Button>();
             _button.onClick.AddListener(() => {
-                _spawner.Spawn();
+                
+                for (int i = 0; i < 10; i++)
+                {
+                    _spawner.Spawn();
+                }
             });
         }
     }

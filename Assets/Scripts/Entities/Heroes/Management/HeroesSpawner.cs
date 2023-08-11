@@ -4,21 +4,21 @@ namespace Entities.Heroes.Management
 {
     public class HeroesSpawner : MonoBehaviour, IEntitiesSpawnerPresenter
     {
-        private IEntitiesManagementUsecase _entitiesManagementUsecase;
+        private IEntitiesManagementUseCase entitiesManagementUseCase;
         private GameObject _prefab;
         
-        public void Initialize(IEntitiesManagementUsecase entitiesManagementUsecase, GameObject prefab)
+        public void Initialize(IEntitiesManagementUseCase entitiesManagementUseCase, GameObject prefab)
         {
-            _entitiesManagementUsecase = entitiesManagementUsecase;
+            this.entitiesManagementUseCase = entitiesManagementUseCase;
             _prefab = prefab;
         }
         
         private void Start()
         {
             var hero = FindObjectOfType<HeroView>();
-            _entitiesManagementUsecase.CreateEntity(new Hero(hero.gameObject.GetInstanceID())
+            entitiesManagementUseCase.CreateEntity(new Hero(hero.gameObject.GetInstanceID())
             {
-                Hp = 10,
+                Health = 10,
                 Position = hero.transform.position,
                 Rotation = hero.transform.rotation
             });
@@ -30,12 +30,12 @@ namespace Entities.Heroes.Management
             var id = newHeroInstance.GetInstanceID();
             var newHero = new Hero(id)
             {
-                Hp = 10,
+                Health = 10,
                 Position = Vector3.zero,
                 Rotation = Quaternion.identity,
             };
             
-            _entitiesManagementUsecase.CreateEntity(newHero);
+            entitiesManagementUseCase.CreateEntity(newHero);
         }
     }
 }

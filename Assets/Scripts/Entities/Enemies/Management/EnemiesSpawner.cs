@@ -1,38 +1,37 @@
-﻿using System;
-using Entities.Heroes;
+﻿using Entities.Heroes;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Entities.Enemies
+namespace Entities.Enemies.Management
 {
     public class EnemiesSpawner : MonoBehaviour, IEntitiesSpawnerPresenter
     {
         private GameObject _prefab;
         
-        private IEntitiesManagementUsecase _entitiesManagementUsecase;
+        private IEntitiesManagementUseCase _managementUseCase;
         
-        public void Initialize(IEntitiesManagementUsecase entitiesManagementUsecase, GameObject prefab)
+        public void Initialize(IEntitiesManagementUseCase entitiesManagementUseCase, GameObject prefab)
         {
             _prefab = prefab;
-            _entitiesManagementUsecase = entitiesManagementUsecase;
+            _managementUseCase = entitiesManagementUseCase;
         }
 
         public void Spawn()
         {
-            var spawnPosition = new Vector3(Random.Range(0,20), 0, Random.Range(0,20));
+            var spawnPosition = FindObjectOfType<HeroView>().transform.position + new Vector3(Random.Range(-20,20), 0, Random.Range(-20,20));
             
             var enemyInstance = Instantiate(_prefab,spawnPosition, Quaternion.identity, transform);
             var id = enemyInstance.GetInstanceID();
             
             var enemy = new Enemy(id)
             {
-                Hp = 1,
+                Health = 1,
                 Attack = 1,
                 Position = spawnPosition,
                 Rotation = Quaternion.identity
             };
             
-            _entitiesManagementUsecase.CreateEntity(enemy);
+            _managementUseCase.CreateEntity(enemy);
         }
     }
 }

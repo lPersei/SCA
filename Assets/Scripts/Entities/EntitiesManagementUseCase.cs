@@ -2,13 +2,13 @@
 
 namespace Entities
 {
-    public class EntitiesManagementUsecase : IEntitiesManagementUsecase
+    public class EntitiesManagementUseCase : IEntitiesManagementUseCase
     {
-        public IReadOnlyReactiveDictionary<int, Entity> Entities { get; }
+        public IReadOnlyReactiveDictionary<int, ReactiveProperty<Entity>> Entities { get; }
 
-        private readonly IEntityDbGateway _dbGateway;
+        private readonly IEntitiesDbGateway _dbGateway;
         
-        public EntitiesManagementUsecase(IEntityDbGateway dbGateway)
+        public EntitiesManagementUseCase(IEntitiesDbGateway dbGateway)
         {
             _dbGateway = dbGateway;
             Entities = _dbGateway.Entities;

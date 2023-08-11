@@ -2,9 +2,9 @@
 
 namespace Entities
 {
-    public interface IEntitiesManagementUsecase
+    public interface IEntitiesManagementUseCase
     {
-        public IReadOnlyReactiveDictionary<int, Entity> Entities { get; }
+        public IReadOnlyReactiveDictionary<int, ReactiveProperty<Entity>> Entities { get; }
         
         public void CreateEntity(Entity newEntity);
         public void DeleteEntity(int id);
